@@ -1,6 +1,6 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION
+from info import AUTH_CHANNEL, LONG_IMDB_DESCRIPTION, MAX_LIST_ELM
 from imdb import IMDb
 import asyncio
 from pyrogram.types import Message
@@ -100,8 +100,8 @@ async def get_poster(query, bulk=False, id=False):
             plot = plot[0]
     else:
         plot = movie.get('plot outline')
-    if plot and len(plot) > 800:
-        plot = plot[0:800] + "..."
+    if plot and len(plot) > 50:
+        plot = plot[0:50] + "..."
 
     return {
         'title': movie.get('title'),
@@ -224,8 +224,12 @@ def list_to_str(k):
         return "N/A"
     elif len(k) == 1:
         return str(k[0])
+    elif MAX_LIST_ELM:
+        k = k[:int(MAX_LIST_ELM)]
+        return ' '.join(f'{elem}, ' for elem in k)
     else:
         return ' '.join(f'{elem}, ' for elem in k)
+
 def last_online(from_user):
     time = ""
     if from_user.is_bot:
