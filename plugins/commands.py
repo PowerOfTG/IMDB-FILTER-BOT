@@ -131,9 +131,7 @@ async def start(client, message):
     buttons = [[
             InlineKeyboardButton('🎭 𝐆𝐫𝐨𝐮𝐩', url='https://t.me/UrvashiTheaters'),
             InlineKeyboardButton('𝐂𝐡𝐚𝐧𝐧𝐞𝐥 🎭', url='https://t.me/Movies_Club_2019')
-            ],[
-            InlineKeyboardButton('🕵‍♂️ 𝐒𝐮𝐩𝐩𝐨𝐫𝐭 𝐆𝐫𝐨𝐮𝐩 🕵‍♀️', url='http://t.me/EvaMariaSupport')
-        ]]
+         ]]
     await client.send_cached_media(
         chat_id=message.from_user.id,
         file_id=file_id,
